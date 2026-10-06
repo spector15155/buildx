@@ -1171,6 +1171,11 @@ func Build(ctx context.Context, nodes []builder.Node, opts map[string]Options, d
 						return err
 					}
 				}
+
+				if err := mergeMultiNodeRegistryCache(ctx, pw, reqForNodes[k][0].so.CacheExports, dps[0].Node().ImageOpt, res); err != nil {
+					return err
+				}
+
 				respMu.Lock()
 				resp[k] = response
 				respMu.Unlock()
